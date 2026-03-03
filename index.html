@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocinología - Ainhoa 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .hide { display: none; }
+        .active-tab { color: #0ea5e9; border-bottom: 3px solid #0ea5e9; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .modal-open { overflow: hidden; }
+        
+        /* Estilos Chibi */
+        .chibi-icon {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.75rem;
+            border-radius: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .chibi-icon:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* Animaciones suaves */
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="pb-48 selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-2xl border-b-[10px] border-sky-50 px-6 md:px-12 py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4 cursor-pointer group" onclick="switchTab('home')">
+                <div class="bg-sky-500 p-3 rounded-[1.5rem] text-white shadow-xl group-hover:rotate-12 transition-all">
+                    <i data-lucide="chef-hat" class="w-8 h-8"></i>
+                </div>
+                <span class="text-3xl md:text-5xl font-serif font-black tracking-tighter text-sky-600 italic">Cocinología</span>
+            </div>
+            <div class="hidden lg:flex items-center gap-14">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn font-black uppercase tracking-[0.3em] text-[11px] transition-all relative py-3 active-tab text-sky-600">Inicio</button>
+                <button onclick="switchTab('recipes')" id="nav-recipes" class="nav-btn font-black uppercase tracking-[0.3em] text-[11px] transition-all relative py-3 text-slate-300">Recetario</button>
+                <button onclick="switchTab('scan')" id="nav-scan" class="nav-btn font-black uppercase tracking-[0.3em] text-[11px] transition-all relative py-3 text-slate-300">Scan IA</button>
+                <button onclick="switchTab('blog')" id="nav-blog" class="nav-btn font-black uppercase tracking-[0.3em] text-[11px] transition-all relative py-3 text-slate-300">Guía Europa</button>
+            </div>
+            <div class="bg-sky-50 p-4 rounded-[1.5rem] text-sky-500 hover:bg-sky-100 transition-all cursor-pointer border border-white">
+                <i data-lucide="search" class="w-6 h-6"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 md:py-20">
+        
+        <!-- SECCIÓN INICIO -->
+        <div id="section-home" class="tab-section fade-in space-y-16">
+            <div class="relative h-[500px] md:h-[650px] rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white group">
+                <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" alt="Portada Cocinología">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent flex flex-col justify-end p-8 md:p-16">
+                    <div class="bg-white/95 backdrop-blur-xl p-8 md:p-12 rounded-[3.5rem] w-fit shadow-2xl">
+                        <h1 class="text-4xl md:text-7xl font-serif font-black text-sky-600 mb-2 tracking-tighter">Cocinología</h1>
+                        <p class="text-slate-800 text-xl md:text-3xl font-black italic">Recorriendo la comida</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="bg-white rounded-[4rem] p-8 md:p-12 shadow-2xl shadow-sky-100 border-4 border-sky-50 flex flex-col md:flex-row items-center gap-14">
+                <div class="relative shrink-0">
+                    <div class="w-64 h-64 rounded-[4rem] bg-sky-200 overflow-hidden shadow-inner border-8 border-white rotate-3">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&h=500&q=80" alt="Ainhoa" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="space-y-8 text-center md:text-left flex-1">
+                    <h2 class="text-5xl font-serif font-black text-slate-800 leading-tight">Hola, soy Ainhoa</h2>
+                    <p class="text-slate-600 leading-relaxed text-2xl font-bold">
+                        Soy una apasionada de los viajes y la buena mesa. He recorrido Europa para traerte lo mejor de mis experiencias y recetas.
+                    </p>
+                    
+                    <!-- CHAT CON CHEF (IA) -->
+                    <div class="bg-sky-50 p-6 md:p-8 rounded-[3rem] border-2 border-sky-100 space-y-6">
+                        <p class="text-sky-700 font-black text-sm uppercase flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-sky-400"></i> ✨ Pregúntale a Chef Ainhoa
+                        </p>
+                        <div class="flex gap-3">
+                            <input id="chef-input" type="text" class="flex-1 bg-white px-6 py-3 rounded-2xl border border-sky-100 outline-none text-slate-800 font-bold" placeholder="¿Algún consejo para el risotto?">
+                            <button onclick="askChef()" id="chef-btn" class="bg-sky-500 text-white p-4 rounded-2xl hover:bg-sky-600 transition-all shadow-lg shadow-sky-200">
+                                <i data-lucide="send" class="w-6 h-6"></i>
+                            </button>
+                        </div>
+                        <div id="chef-response" class="hide bg-white p-6 rounded-3xl border-2 border-sky-50 text-slate-800 font-medium italic shadow-sm leading-relaxed"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECCIÓN RECETARIO -->
+        <div id="section-recipes" class="tab-section fade-in hide space-y-12">
+            <div class="text-center space-y-6">
+                <h2 class="text-6xl font-serif font-black text-slate-800">Recetario 📖</h2>
+                <div class="relative max-w-2xl mx-auto">
+                    <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 text-sky-400 w-6 h-6"></i>
+                    <input type="text" id="recipe-search" oninput="filterRecipes()" placeholder="¿Qué cocinamos hoy?..." class="w-full pl-16 pr-8 py-7 bg-white border-4 border-sky-50 rounded-[3rem] focus:border-sky-300 outline-none transition-all shadow-xl text-xl text-slate-800 font-bold">
+                </div>
+            </div>
+            <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Inyectado por JS -->
+            </div>
+        </div>
+
+        <!-- SECCIÓN ESCÁNER -->
+        <div id="section-scan" class="tab-section fade-in hide max-w-4xl mx-auto space-y-12">
+            <div class="bg-white p-10 md:p-16 rounded-[5rem] shadow-2xl border-[16px] border-sky-50 text-center space-y-12">
+                <div class="space-y-4">
+                    <div class="chibi-icon mx-auto scale-150 mb-4"><i data-lucide="camera" class="w-8 h-8"></i></div>
+                    <h2 class="text-5xl font-serif font-black text-slate-800">Scan & Eat IA</h2>
+                    <p class="text-slate-500 max-w-md mx-auto italic font-bold text-lg">Sube una foto y mi IA te dirá qué es y sus valores nutricionales.</p>
+                </div>
+                
+                <div id="scan-init" onclick="document.getElementById('file-input').click()" class="border-8 border-dashed border-sky-100 rounded-[4rem] p-24 hover:bg-sky-50 transition-all cursor-pointer group relative overflow-hidden">
+                    <i data-lucide="camera" class="mx-auto text-sky-200 group-hover:text-sky-500 transition-all mb-8 w-24 h-24"></i>
+                    <p class="font-black text-sky-500 uppercase tracking-[0.4em] text-sm">✨ Escanear Plato</p>
+                    <input type="file" id="file-input" class="hide" accept="image/*" onchange="handleFileUpload(event)">
+                </div>
+
+                <div id="scan-loading" class="hide py-24 space-y-10">
+                    <i data-lucide="chef-hat" class="mx-auto text-sky-500 animate-bounce w-24 h-24"></i>
+                    <p class="text-sky-600 font-black text-xl italic animate-pulse tracking-widest uppercase">Ainhoa está analizando...</p>
+                </div>
+
+                <div id="scan-result" class="hide text-left space-y-10">
+                    <!-- Inyectado por JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN BLOG -->
+        <div id="section-blog" class="tab-section fade-in hide max-w-6xl mx-auto space-y-24">
+            <div class="text-center space-y-6">
+                <h2 class="text-7xl font-serif font-black text-slate-800 tracking-tighter">Guía Europa 2025 🌍</h2>
+                <p class="text-sky-500 font-black uppercase tracking-[0.6em] text-sm italic">Clica en un destino para generar un itinerario gourmet</p>
+            </div>
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Inyectado por JS -->
+            </div>
+        </div>
+
+        <!-- SECCIÓN ITINERARIO (GENERADO POR IA) -->
+        <div id="section-itinerary" class="tab-section fade-in hide max-w-4xl mx-auto space-y-8 pb-32">
+            <button onclick="switchTab('blog')" class="flex items-center gap-2 text-slate-800 font-black hover:text-sky-600 transition-colors uppercase text-xs tracking-widest">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Guías
+            </button>
+            <div class="bg-white p-10 md:p-14 rounded-[4rem] shadow-xl border-2 border-sky-50">
+                <h2 id="itinerary-title" class="text-4xl font-serif font-black text-sky-600 mb-6 flex items-center gap-3">
+                    <i data-lucide="sparkles" class="text-sky-400"></i> Plan Gourmet
+                </h2>
+                <div id="itinerary-content" class="prose prose-sky max-w-none text-slate-700 whitespace-pre-wrap font-medium text-lg leading-relaxed bg-sky-50/30 p-8 rounded-3xl border border-sky-100"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- NAVEGACIÓN MÓVIL (ICONOS NEGROS) -->
+    <div class="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-white/90 backdrop-blur-3xl border-[8px] border-sky-50 rounded-[4rem] shadow-2xl z-50 px-10 py-6 flex justify-between items-center">
+        <button onclick="switchTab('home')" class="mobile-nav-btn text-sky-500 scale-125" id="mob-home"><i data-lucide="compass" class="w-8 h-8"></i></button>
+        <button onclick="switchTab('recipes')" class="mobile-nav-btn text-black" id="mob-recipes"><i data-lucide="book-open" class="w-8 h-8"></i></button>
+        <button onclick="switchTab('scan')" class="mobile-nav-btn text-black" id="mob-scan"><i data-lucide="camera" class="w-8 h-8"></i></button>
+        <button onclick="switchTab('blog')" class="mobile-nav-btn text-black" id="mob-blog"><i data-lucide="navigation" class="w-8 h-8"></i></button>
+    </div>
+
+    <!-- MODAL DE RECETA -->
+    <div id="recipe-modal" class="hide fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-slate-900/75 backdrop-blur-xl" onclick="closeModal()"></div>
+        <div class="bg-white w-full max-w-7xl rounded-[4rem] md:rounded-[5rem] overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row max-h-[95vh] border-[10px] md:border-[16px] border-white animate-in zoom-in-95 duration-300">
+            <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 z-20 bg-slate-100 hover:bg-slate-200 text-slate-900 p-4 rounded-full transition-all shadow-md">
+                <i data-lucide="x" class="w-7 h-7"></i>
+            </button>
+            <div class="md:w-1/2 h-64 md:h-auto bg-sky-50 overflow-hidden flex items-center justify-center">
+                <img id="modal-img" src="" class="w-full h-full object-cover">
+            </div>
+            <div class="md:w-1/2 p-8 md:p-16 overflow-y-auto space-y-10">
+                <div id="modal-content-area">
+                    <!-- Contenido dinámico -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="max-w-7xl mx-auto px-12 mt-40 text-center space-y-16 pb-32">
+        <div class="flex justify-center items-center gap-8">
+            <div class="h-1.5 w-32 bg-sky-100 rounded-full"></div>
+            <div class="chibi-icon bg-sky-500 text-white shadow-2xl scale-150"><i data-lucide="chef-hat" class="w-8 h-8"></i></div>
+            <div class="h-1.5 w-32 bg-sky-100 rounded-full"></div>
+        </div>
+        <div class="space-y-6">
+            <h3 class="text-6xl font-serif font-black italic text-sky-600 tracking-tighter">Cocinología</h3>
+            <p class="text-slate-400 font-black uppercase tracking-[0.5em] text-xs">Ainhoa • Recorriendo el mundo • 2026</p>
+        </div>
+        <p class="text-slate-200 text-[10px] font-black tracking-[0.6em] uppercase">© Cocinología - Potenciado por ✨ Gemini 2.5 AI</p>
+    </footer>
+
+    <script>
+        // --- CONFIGURACIÓN Y DATOS ---
+        const apiKey = ""; 
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+
+        const recipes = [
+            { 
+                id: 1, title: "Pasta al Pesto Genovese", category: "Italiana", 
+                image: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80", 
+                time: "15 min", difficulty: "Fácil", calories: "420 kcal", origin: "Italia",
+                ingredients: ["320g de Pasta", "50g de Albahaca", "30g de Piñones", "60g de Parmesano", "100ml de Aceite"],
+                steps: ["Lava la albahaca muy bien.", "Machaca el ajo y los piñones hasta que sea una pasta.", "Añade el queso y el aceite poco a poco emulsionando.", "Mezcla con la pasta hervida al dente."],
+                description: "Clásico de Liguria con aroma insuperable."
+            },
+            { 
+                id: 2, title: "Takoyaki de Pulpo", category: "Asiática", 
+                image: "https://images.unsplash.com/photo-1591122948501-72266b6186f8?auto=format&fit=crop&w=800&q=80", 
+                time: "30 min", difficulty: "Alta", calories: "300 kcal", origin: "Osaka, Japón",
+                ingredients: ["200g de Harina", "450ml de Caldo Dashi", "100g de Pulpo cocido", "Salsa Takoyaki", "Katsuobushi"],
+                steps: ["Mezcla harina y caldo hasta que sea líquido.", "Engrasa el molde caliente.", "Añade pulpo y gira las bolas con palillos.", "Decora con salsas y copos de bonito."],
+                description: "Street food crujiente por fuera y tierno por dentro."
+            },
+            { 
+                id: 3, title: "Huevos Rotos con Jamón", category: "Española", 
+                image: "https://images.unsplash.com/photo-1644783103289-1834220b3f5c?auto=format&fit=crop&w=800&q=80", 
+                time: "20 min", difficulty: "Fácil", calories: "600 kcal", origin: "España",
+                ingredients: ["3 Patatas grandes", "4 Huevos de corral", "100g de Jamón Ibérico", "Aceite de Oliva"],
+                steps: ["Fríe las patatas peladas en bastones.", "Fríe los huevos dejando la yema líquida.", "Sirve con el jamón por encima.", "Rompe los huevos justo al servir."],
+                description: "Sencillez absoluta, felicidad inmediata."
+            },
+            { 
+                id: 4, title: "Callos a la Madrileña", category: "Española", 
+                image: "https://images.unsplash.com/photo-1594041180293-f111d4e69d72?auto=format&fit=crop&w=800&q=80", 
+                time: "180 min", difficulty: "Alta", calories: "450 kcal", origin: "Madrid",
+                ingredients: ["500g de Callos", "1 Chorizo", "1 Morcilla", "100g de Jamón", "Pimentón de la Vera"],
+                steps: ["Cuece los callos durante 3 horas.", "Haz un sofrito potente con jamón y pimentón.", "Añade el embutido y cocina todo junto.", "Deja reposar 24 horas para que el sabor asiente."],
+                description: "Un guiso meloso e ideal para los días de frío."
+            }
+        ];
+
+        const blogPosts = [
+            { id: "espana", title: "Tapeo por Madrid y Barcelona", city: "España", image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80" },
+            { id: "italia", title: "Florencia y Roma: El Renacimiento", city: "Italia", image: "https://images.unsplash.com/photo-1529260839382-3eff510bac1e?auto=format&fit=crop&w=1200&q=80" },
+            { id: "francia", title: "París: La Ciudad de las Luces", city: "Francia", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80" },
+            { id: "alemania", title: "Berlín y el encanto de Baviera", city: "Alemania", image: "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=80" }
+        ];
+
+        let currentRecipe = null;
+
+        // --- LÓGICA DE NAVEGACIÓN ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hide'));
+            const targetSection = document.getElementById('section-' + tabId);
+            if(targetSection) targetSection.classList.remove('hide');
+
+            // Nav escritorio
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active-tab', 'text-sky-600');
+                b.classList.add('text-slate-300');
+            });
+            const activeNav = document.getElementById('nav-' + tabId);
+            if(activeNav) {
+                activeNav.classList.add('active-tab', 'text-sky-600');
+                activeNav.classList.remove('text-slate-300');
+            }
+
+            // Nav móvil
+            document.querySelectorAll('.mobile-nav-btn').forEach(b => {
+                b.classList.remove('text-sky-500', 'scale-125');
+                b.classList.add('text-black');
+            });
+            const activeMob = document.getElementById('mob-' + tabId);
+            if(activeMob) {
+                activeMob.classList.add('text-sky-500', 'scale-125');
+                activeMob.classList.remove('text-black');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // --- LÓGICA DE RECETAS ---
+        function filterRecipes() {
+            const query = document.getElementById('recipe-search').value.toLowerCase();
+            const filtered = recipes.filter(r => r.title.toLowerCase().includes(query));
+            renderRecipes(filtered);
+        }
+
+        function renderRecipes(list) {
+            const grid = document.getElementById('recipe-grid');
+            grid.innerHTML = list.map(r => `
+                <div onclick="openRecipe(${r.id})" class="bg-white rounded-[4rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-4 border-sky-50 group">
+                    <div class="h-72 overflow-hidden bg-sky-50 relative">
+                        <img src="${r.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-10">
+                        <span class="text-sky-400 font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">${r.category}</span>
+                        <h3 class="text-3xl font-serif font-black text-slate-800 mb-6 leading-tight">${r.title}</h3>
+                        <div class="flex justify-between items-center text-sky-600 font-black text-xs pt-6 border-t border-sky-50">
+                            <span class="flex items-center gap-2 bg-sky-50 px-4 py-2 rounded-2xl"><i data-lucide="clock" class="w-4 h-4"></i> ${r.time}</span>
+                            <span class="bg-sky-50 px-4 py-2 rounded-2xl">${r.calories}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function openRecipe(id) {
+            currentRecipe = recipes.find(item => item.id === id);
+            document.getElementById('modal-img').src = currentRecipe.image;
+            document.getElementById('recipe-modal').classList.remove('hide');
+            document.body.classList.add('modal-open');
+            renderModalMain();
+        }
+
+        function renderModalMain() {
+            const r = currentRecipe;
+            document.getElementById('modal-content-area').innerHTML = `
+                <div>
+                    <span class="text-sky-400 text-xs font-black uppercase tracking-[0.5em] mb-4 block">Origen: ${r.origin}</span>
+                    <h2 class="text-6xl font-serif font-black text-slate-800 leading-tight">${r.title}</h2>
+                </div>
+                
+                <!-- Sommelier IA -->
+                <div class="space-y-6">
+                    <button onclick="getPairing('${r.title}')" id="sommelier-btn" class="w-full bg-sky-100 text-sky-800 py-4 rounded-3xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 border-2 border-sky-200 hover:bg-sky-200 transition-all shadow-sm">
+                        <i data-lucide="glass-water" class="w-5 h-5"></i> ✨ Maridaje Sommelier
+                    </button>
+                    <div id="pairing-box" class="hide bg-white p-6 rounded-3xl border-4 border-sky-50 shadow-inner italic font-bold text-sky-900 leading-relaxed fade-in"></div>
+                </div>
+
+                <div class="flex gap-10 border-y-8 border-sky-50 py-10">
+                    <div><p class="text-[11px] font-black text-slate-300 uppercase mb-2">Tiempo</p><p class="font-serif text-3xl text-sky-600 font-black">${r.time}</p></div>
+                    <div><p class="text-[11px] font-black text-slate-300 uppercase mb-2">Nivel</p><p class="font-serif text-3xl text-sky-600 font-black">${r.difficulty}</p></div>
+                    <div><p class="text-[11px] font-black text-slate-300 uppercase mb-2">Energía</p><p class="font-serif text-3xl text-sky-600 font-black">${r.calories}</p></div>
+                </div>
+
+                <div class="space-y-12">
+                    <div>
+                        <h4 class="text-3xl font-serif text-slate-800 mb-8 flex items-center gap-4"><span class="chibi-icon"><i data-lucide="utensils" class="w-5 h-5"></i></span> Ingredientes</h4>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            ${r.ingredients.map(ing => `<li class="bg-sky-50/50 p-5 rounded-[2rem] text-slate-700 text-lg font-black flex items-center gap-5 border border-sky-100 shadow-sm"><div class="w-4 h-4 bg-sky-400 rounded-full"></div> ${ing}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-serif text-slate-800 mb-8 flex items-center gap-4"><span class="chibi-icon"><i data-lucide="list-ordered" class="w-5 h-5"></i></span> Paso a Paso</h4>
+                        <div class="space-y-6">
+                            ${r.steps.map((s, i) => `
+                                <div class="flex gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center font-black text-sm">${i+1}</span>
+                                    <p class="text-slate-600 font-medium leading-relaxed pt-1 text-lg">${s}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('recipe-modal').classList.add('hide');
+            document.body.classList.remove('modal-open');
+        }
+
+        // --- GEMINI API CORE ---
+        async function callGemini(prompt, system, isImage = false, base64 = null) {
+            const parts = [{ text: prompt }];
+            if(isImage && base64) {
+                parts.push({ inlineData: { mimeType: "image/jpeg", data: base64.split(',')[1] } });
+            }
+
+            const payload = {
+                contents: [{ parts: parts }],
+                systemInstruction: system ? { parts: [{ text: system }] } : undefined
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(`${API_URL}?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (e) {
+                    if (i === 4) throw e;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // --- FUNCIONES IA ESPECÍFICAS ---
+        async function askChef() {
+            const input = document.getElementById('chef-input');
+            const box = document.getElementById('chef-response');
+            const btn = document.getElementById('chef-btn');
+            if(!input.value.trim()) return;
+
+            btn.disabled = true;
+            box.classList.remove('hide');
+            box.innerText = "Chef Ainhoa está pensando... 💭";
+            
+            try {
+                const res = await callGemini(input.value, "Eres Chef Ainhoa, una experta de 18 años. Responde de forma muy juvenil, con energía y muchos emojis.");
+                box.innerText = res;
+                input.value = "";
+            } catch (e) {
+                box.innerText = "¡Uy! Parece que se me ha quemado algo. Inténtalo de nuevo.";
+            } finally { btn.disabled = false; }
+        }
+
+        async function getPairing(dish) {
+            const box = document.getElementById('pairing-box');
+            box.classList.remove('hide');
+            box.innerText = "Buscando la copa perfecta para " + dish + "... 🍷";
+            try {
+                const res = await callGemini(`¿Qué vino o bebida marida mejor con ${dish}?`, "Eres un sommelier experto internacional.");
+                box.innerText = res;
+            } catch (e) { box.innerText = "No he podido encontrar el maridaje ideal esta vez."; }
+        }
+
+        async function generateItinerary(city) {
+            switchTab('itinerary');
+            const title = document.getElementById('itinerary-title');
+            const box = document.getElementById('itinerary-content');
+            
+            title.innerHTML = `<i data-lucide="sparkles" class="text-sky-400"></i> Plan para ${city}`;
+            box.innerText = "Diseñando tu ruta gourmet perfecta por " + city + "... ✈️🍴";
+            lucide.createIcons();
+
+            try {
+                const res = await callGemini(`Crea un itinerario de 3 días enfocado 100% en gastronomía para un viaje a ${city}. Incluye platos típicos, zonas de moda y tips locales.`, "Eres una guía de viajes de lujo y experta foodie.");
+                box.innerText = res;
+            } catch (e) { box.innerText = "¡Vaya! Hubo un problema al preparar el itinerario."; }
+        }
+
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+
+            document.getElementById('scan-init').classList.add('hide');
+            document.getElementById('scan-loading').classList.remove('hide');
+
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+                const base64 = reader.result;
+                try {
+                    const resText = await callGemini(
+                        "Identifica esta comida y sus macros. Devuelve solo JSON crudo con estas llaves: name, calories, protein, carbs, fats, tip.",
+                        "Responde solo el JSON, sin bloques de código ``` ni texto adicional.",
+                        true, base64
+                    );
+                    
+                    const cleanJson = resText.replace(/```json|```/g, "").trim();
+                    const res = JSON.parse(cleanJson);
+                    
+                    document.getElementById('scan-loading').classList.add('hide');
+                    const resBox = document.getElementById('scan-result');
+                    resBox.classList.remove('hide');
+                    resBox.innerHTML = `
+                        <div class="flex justify-between items-center border-b-8 border-sky-50 pb-8">
+                            <h3 class="text-5xl font-serif font-black text-slate-800">${res.name}</h3>
+                            <button onclick="switchTab('scan'); location.reload()" class="bg-sky-500 text-white px-8 py-4 rounded-[2rem] font-black text-xs uppercase shadow-xl">Nuevo Scan</button>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div class="bg-sky-50 p-8 rounded-[3rem] text-center border-4 border-white shadow-xl"><p class="text-[10px] font-black uppercase opacity-60">Calorías</p><p class="text-3xl font-serif font-black">${res.calories}</p></div>
+                            <div class="bg-blue-50 p-8 rounded-[3rem] text-center border-4 border-white shadow-xl"><p class="text-[10px] font-black uppercase opacity-60">Proteína</p><p class="text-3xl font-serif font-black">${res.protein}</p></div>
+                            <div class="bg-indigo-50 p-8 rounded-[3rem] text-center border-4 border-white shadow-xl"><p class="text-[10px] font-black uppercase opacity-60">Carbohidratos</p><p class="text-3xl font-serif font-black">${res.carbs}</p></div>
+                            <div class="bg-cyan-50 p-8 rounded-[3rem] text-center border-4 border-white shadow-xl"><p class="text-[10px] font-black uppercase opacity-60">Grasas</p><p class="text-3xl font-serif font-black">${res.fats}</p></div>
+                        </div>
+                        <div class="bg-sky-50 p-10 rounded-[4rem] border-4 border-white shadow-inner italic font-bold text-sky-800 leading-relaxed">"✨ ${res.tip}"</div>
+                    `;
+                } catch (err) { 
+                    alert("Error al analizar la imagen. Asegúrate de que sea nítida."); 
+                    location.reload(); 
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- INICIALIZACIÓN ---
+        window.onload = () => {
+            renderRecipes(recipes);
+            const blogGrid = document.getElementById('blog-grid');
+            blogGrid.innerHTML = blogPosts.map(p => `
+                <article onclick="generateItinerary('${p.city}')" class="bg-white rounded-[5rem] overflow-hidden shadow-2xl border-8 border-white group cursor-pointer hover:-translate-y-6 transition-all fade-in">
+                    <div class="h-[450px] overflow-hidden relative">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2.5s]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 text-white">
+                            <p class="text-xs font-black uppercase tracking-[0.4em] mb-2 opacity-80 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> ${p.city}</p>
+                            <h3 class="text-4xl font-serif font-black leading-tight">${p.title}</h3>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            lucide.createIcons();
+        };
+
+    </script>
+</body>
+</html>
